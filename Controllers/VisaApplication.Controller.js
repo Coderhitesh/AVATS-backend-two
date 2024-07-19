@@ -80,13 +80,10 @@ exports.deleteSingleVisaApplication = async(req,res) => {
 exports.updateVisaApplication = async (req, res) => {
     try {
         const { _id } = req.params
-        const { application, decision } = req.body
+        const { decision } = req.body
 
         // Check for required fields
         const emptyField = []
-        if (!application) {
-            emptyField.push('application is required')
-        }
         if (!decision) {
             emptyField.push('decision is required')
         }
@@ -97,7 +94,7 @@ exports.updateVisaApplication = async (req, res) => {
         // Find and update the Visa Application
         const visaApplication = await VisaApplication.findByIdAndUpdate(
             _id,
-            { application, decision },
+            { decision },
             { new: true, runValidators: true }
         )
 
